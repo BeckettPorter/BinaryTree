@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 /**
  * An Integer Binary Search Tree
- * @author: Your Name Here
- * @version: Date
+ * @author: Beckett Porter
+ * @version: 04/5/24
  */
 
 public class BST {
@@ -46,9 +46,27 @@ public class BST {
      * @param val integer value to search for
      * @return true if val is in the tree, false otherwise
      */
-    public boolean search(int val) {
-        // TODO: Complete the search function
-        return false;
+    public boolean search(int val)
+    {
+        return searchRecursively(root, val);
+    }
+
+    // Helper method used to recursively find if the tree has the desired value or not
+    public boolean searchRecursively(BSTNode n, int searchVal)
+    {
+        if (n == null)
+        {
+            return false;
+        }
+        if (n.getVal() == searchVal)
+        {
+            return true;
+        }
+        if (n.getVal() > searchVal)
+        {
+            return searchRecursively(n.getLeft(), searchVal);
+        }
+        return searchRecursively(n.getRight(), searchVal);
     }
 
     /**
