@@ -52,45 +52,81 @@ public class BST {
     }
 
     // Helper method used to recursively find if the tree has the desired value or not
-    public boolean searchRecursively(BSTNode n, int searchVal)
+    public boolean searchRecursively(BSTNode node, int searchVal)
     {
-        if (n == null)
+        if (node == null)
         {
             return false;
         }
-        if (n.getVal() == searchVal)
+        if (node.getVal() == searchVal)
         {
             return true;
         }
-        if (n.getVal() > searchVal)
+        if (node.getVal() > searchVal)
         {
-            return searchRecursively(n.getLeft(), searchVal);
+            return searchRecursively(node.getLeft(), searchVal);
         }
-        return searchRecursively(n.getRight(), searchVal);
+        return searchRecursively(node.getRight(), searchVal);
     }
 
     /**
      * @return ArrayList of BSTNodes in inorder
      */
     public ArrayList<BSTNode> getInorder() {
-        // TODO: Complete inorder traversal
-        return null;
+        ArrayList<BSTNode> returnArray = new ArrayList<>();
+        inorderRecursively(root, returnArray);
+        return returnArray;
+    }
+
+    // Recursive helper method to get the inOrder traversal of the tree
+    private void inorderRecursively(BSTNode node, ArrayList<BSTNode> ar)
+    {
+        if (node != null)
+        {
+            inorderRecursively(node.getLeft(), ar);
+            ar.add(node);
+            inorderRecursively(node.getRight(), ar);
+        }
     }
 
     /**
      * @return ArrayList of BSTNodes in preorder
      */
     public ArrayList<BSTNode> getPreorder() {
-        // TODO: Complete preorder traversal
-        return null;
+        ArrayList<BSTNode> returnArray = new ArrayList<>();
+        preorderRecursively(root, returnArray);
+        return returnArray;
+    }
+
+    // Recursive helper method to get the preOrder traversal of the tree
+    private void preorderRecursively(BSTNode node, ArrayList<BSTNode> ar)
+    {
+        if (node != null)
+        {
+            ar.add(node);
+            preorderRecursively(node.getLeft(), ar);
+            preorderRecursively(node.getRight(), ar);
+        }
     }
 
     /**
      * @return ArrayList of BSTNodes in postorder
      */
     public ArrayList<BSTNode> getPostorder() {
-        // TODO: Complete postorder traversal
-        return null;
+        ArrayList<BSTNode> returnArray = new ArrayList<>();
+        postorderRecursively(root, returnArray);
+        return returnArray;
+    }
+
+    // Recursive helper method to get the postOrder traversal of the tree
+    private void postorderRecursively(BSTNode node, ArrayList<BSTNode> ar)
+    {
+        if (node != null)
+        {
+            postorderRecursively(node.getLeft(), ar);
+            postorderRecursively(node.getRight(), ar);
+            ar.add(node);
+        }
     }
 
     /**
@@ -99,8 +135,39 @@ public class BST {
      * root instance variable to be the root of the new modified tree.
      * @param val The value ot insert
      */
+    // Method to call insertRecursively and start the recursion with the input int val and root node
     public void insert(int val) {
-        // TODO: Complete insert
+        if (!search(val))
+        {
+            insertRecursively(root, val);
+        }
+    }
+
+    // Recursive helper method that inserts a new node with the initial input value into the tree
+    private void insertRecursively(BSTNode node, int val)
+    {
+        if (val < node.getVal())
+        {
+            if (node.getLeft() == null)
+            {
+                node.setLeft(new BSTNode(val));
+            }
+            else
+            {
+                insertRecursively(node.getLeft(), val);
+            }
+        }
+        else if (val > node.getVal())
+        {
+            if (node.getRight() == null)
+            {
+                node.setRight(new BSTNode(val));
+            }
+            else
+            {
+                insertRecursively(node.getRight(), val);
+            }
+        }
     }
 
     /**
