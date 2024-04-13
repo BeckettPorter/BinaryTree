@@ -2,7 +2,7 @@
  * The Node for an Integer Binary Tree
  *
  * @author: Nandhini Namasivayam, Completed by Beckett Porter
- * @version: 04/5/24
+ * @version: 04/13/24
  */
 
 public class BSTNode {
